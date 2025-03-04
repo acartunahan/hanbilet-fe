@@ -27,6 +27,10 @@ export class UserPanelComponent implements OnInit {
   }[] = [];
   
   
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 99f825d (frontend guncel)
   userId!: number;
 
   constructor(private userService: UserService, private authService: AuthService, private http: HttpClient) {}
@@ -73,4 +77,9 @@ export class UserPanelComponent implements OnInit {
       });
   }
   
+<<<<<<< HEAD
+=======
+  
+  
+>>>>>>> 99f825d (frontend guncel)
 }

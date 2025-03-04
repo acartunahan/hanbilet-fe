@@ -65,19 +65,24 @@ export class KoltukSecComponent implements OnInit {
 
     const bilet = {
       seferId: this.seferId,
+      userId: localStorage.getItem('userId'),  // 🔥 Kullanıcının ID'sini ekle
       koltukNumarasi: this.selectedKoltuk
     };
-
-    this.http.post('http://localhost:5232/api/koltuklar/satin-al', bilet).subscribe({
+    
+    console.log("Bilet Gönderiliyor:", bilet); // 🔥 Gönderilen veriyi kontrol et
+    
+    this.http.post('http://localhost:5232/api/biletler', bilet, { headers: { 'Content-Type': 'application/json' } }).subscribe({
       next: () => {
         alert("Bilet satın alındı!");
-        this.getKoltuklar(); // 📌 Güncellenmiş koltukları tekrar API'den çek
+        this.getKoltuklar();
       },
       error: (error) => {
+        console.error("Bilet satın alma hatası:", error); // 🔥 Hata mesajını logla
         alert("Bilet satın alınamadı: " + error.error);
       }
     });
 }
+
 
   
   
