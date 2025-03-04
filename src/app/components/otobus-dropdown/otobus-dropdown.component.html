@@ -1,0 +1,6 @@
+<select (change)="onOtobusChange($event)" class="form-control">
+  <option value="" disabled selected>Otobüs Seç</option>
+  <option *ngFor="let otobus of otobusler" [value]="otobus.id">
+    {{ otobus.plaka }} - {{ otobus.otobusModel }}
+  </option>
+</select>

@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h2 class="text-center">Kullanıcı Bilgileri</h2>
+
+  <div class="card p-4 shadow text-center">
+    <h4>Ad:</h4>
+    <p class="fs-5">{{ user.name }}</p>
+
+    <h4>E-posta:</h4>
+    <p class="fs-5">{{ user.email }}</p>
+  </div>
+
+  <h3 class="mt-5">📢 Biletlerim</h3>
+
+  <div *ngIf="biletler.length === 0" class="text-danger mt-3">
+    ❌ Henüz satın alınmış biletiniz yok.
+  </div>
+
+  <div class="card p-3 shadow mt-3" *ngFor="let bilet of biletler">
+    <h5>Sefer No: {{ bilet.seferId }}</h5>
+    <p><strong>Kalkış Şehri:</strong> {{ bilet.kalkisSehir }}</p>
+    <p><strong>Varış Şehri:</strong> {{ bilet.varisSehir }}</p>
+    <p><strong>Koltuk No:</strong> {{ bilet.koltukNumarasi }}</p>
+    <p><strong>Fiyat:</strong> {{ bilet.fiyat }} TL</p>
+    <p><strong>Sefer Tarihi:</strong> {{ bilet.tarih }} - {{ bilet.saat }}</p>
+    <p><strong>Firma:</strong> {{ bilet.firmaAdi }}</p>
+    <p><strong>Otobüs:</strong> {{ bilet.otobusPlaka }}</p>
+    <p class="text-muted"><strong>Satın Alma Tarihi:</strong> {{ bilet.satinAlmaTarihi | date:'yyyy-MM-dd HH:mm' }}</p>
+  </div>
+</div>

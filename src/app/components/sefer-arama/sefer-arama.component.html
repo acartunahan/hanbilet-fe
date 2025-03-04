@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <h2>🚌 Sefer Arama</h2>
+
+  <!-- Filtreleme Formu -->
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label>Kalkış Şehri:</label>
+      <select [(ngModel)]="kalkisSehirId" class="form-control">
+        <option value="" disabled selected>Şehir Seç</option>
+        <option *ngFor="let sehir of sehirler" [value]="sehir.id">
+          {{ sehir.sehirAdi }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label>Varış Şehri:</label>
+      <select [(ngModel)]="varisSehirId" class="form-control">
+        <option value="" disabled selected>Şehir Seç</option>
+        <option *ngFor="let sehir of sehirler" [value]="sehir.id">
+          {{ sehir.sehirAdi }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label>Tarih:</label>
+      <input type="date" [(ngModel)]="tarih" class="form-control" />
+    </div>
+
+    <div class="col-md-3 d-flex align-items-end">
+      <button (click)="araSeferler()" class="btn btn-success w-100">Ara</button>
+    </div>
+  </div>
+
+  <!-- Seferleri Listeleme -->
+  <div *ngIf="aramaYapildi">
+    <h4 *ngIf="seferler.length === 0" class="text-danger mt-3">❌ Uygun Sefer Bulunamadı</h4>
+
+    <table *ngIf="seferler.length > 0" class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Kalkış Şehri</th>
+          <th>Varış Şehri</th>
+          <th>Tarih</th>
+          <th>Saat</th> <!-- ⏰ Yeni eklendi -->
+          <th>Fiyat</th>
+          <th>Firma</th>
+          <th>Otobüs</th>
+          <th>İşlem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sefer of seferler; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ sefer.kalkisSehir }}</td>
+          <td>{{ sefer.varisSehir }}</td>
+          <td>{{ sefer.tarih }}</td>
+          <td>{{ sefer.saat }}</td> <!-- ⏰ Yeni eklendi -->
+          <td>{{ sefer.fiyat | currency:'TRY' }}</td>
+          <td>{{ sefer.firmaAdi }}</td>
+          <td>{{ sefer.otobusPlaka }}</td>
+          <td>
+            <button *ngIf="isLoggedIn" class="btn btn-primary" (click)="satinAl(sefer.id)">
+              Satın Al
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

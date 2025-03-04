@@ -1,0 +1,38 @@
+.bus-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+/* 🔥 Alınabilir koltuklar (Yeşil) */
+.seat:not(.dolu) {
+  background-color: green;
+  color: white;
+}
+
+/* 🔴 Dolu koltuklar (Kırmızı) */
+.seat.dolu {
+  background-color: red;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* 🎯 Seçili koltuk (Mavi) */
+.seat.selected {
+  background-color: blue;
+  color: white;
+  transform: scale(1.1);
+}

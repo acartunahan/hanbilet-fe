@@ -1,0 +1,6 @@
+<select [(ngModel)]="selectedFirma" (change)="onFirmaChange()" class="form-control">
+  <option value="" disabled selected>Firma Seç</option>
+  <option *ngFor="let firma of firmalar" [value]="firma.id">
+    {{ firma.firmaAdi }}
+  </option>
+</select>
