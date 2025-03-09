@@ -1,24 +1,97 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
   <div class="card shadow-lg p-4" style="width: 400px;">
     <h2 class="text-center text-success">Kayıt Ol</h2>
-    
+
     <form (ngSubmit)="register()">
       <div class="mb-3">
         <label class="form-label">Ad</label>
-        <input type="text" class="form-control" [(ngModel)]="user.name" name="name" required />
+        <input type="text" class="form-control" [(ngModel)]="user.name" name="name" required placeholder="Adınızı girin" />
       </div>
+
+      <div class="mb-3">
+        <label class="form-label">Soyad</label>
+        <input type="text" class="form-control" [(ngModel)]="user.surname" name="surname" required placeholder="Soyadınızı girin" />
+      </div>
+
       <div class="mb-3">
         <label class="form-label">E-posta</label>
-        <input type="email" class="form-control" [(ngModel)]="user.email" name="email" required />
+        <input type="email" class="form-control" [(ngModel)]="user.email" name="email" required placeholder="ornek@email.com" />
       </div>
+
+      <div class="mb-3">
+        <label class="form-label">Telefon Numarası</label>
+        <input type="tel" class="form-control" [(ngModel)]="user.phone" name="phone" pattern="[0-9]{10}" required placeholder="5XX-XXX-XX-XX" />
+      </div>
+
+      <!-- 📌 Doğum Tarihi Gün, Ay, Yıl -->
+      <div class="mb-3">
+        <label class="form-label">Doğum Tarihi</label>
+        <div class="d-flex gap-2">
+          <select class="form-control" [(ngModel)]="user.birthDay" name="birthDay" required>
+            <option value="" disabled selected>Gün</option>
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+          <select class="form-control" [(ngModel)]="user.birthMonth" name="birthMonth" required>
+            <option value="" disabled selected>Ay</option>
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+          <select class="form-control" [(ngModel)]="user.birthYear" name="birthYear" required>
+            <option value="" disabled selected>Yıl</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Cinsiyet</label>
+        <select class="form-control" [(ngModel)]="user.cinsiyet" name="cinsiyet" required>
+          <option value="" disabled selected>Cinsiyet Seç</option>
+          <option value="Erkek">Erkek</option>
+          <option value="Kadın">Kadın</option>
+        </select>
+      </div>
+      
+
       <div class="mb-3">
         <label class="form-label">Şifre</label>
-        <input type="password" class="form-control" [(ngModel)]="user.password" name="password" required />
+        <input type="password" class="form-control" [(ngModel)]="user.password" name="password" required placeholder="Şifrenizi girin" />
       </div>
+
+      <div class="mb-3">
+        <label class="form-label">Şifre Tekrar</label>
+        <input type="password" class="form-control" [(ngModel)]="user.confirmPassword" name="confirmPassword" required placeholder="Şifrenizi tekrar girin" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Rol Seçiniz</label>
+        <select class="form-control" [(ngModel)]="user.role" name="role" required>
+          <option value="" disabled selected>Rol Seç</option>
+          <option value="User">Kullanıcı</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+      
+
       <button type="submit" class="btn btn-success w-100">Kayıt Ol</button>
     </form>
-    
+
     <p class="text-danger mt-3 text-center">{{ message }}</p>
     <p class="text-center mt-2">Zaten hesabın var mı? <a routerLink="/login">Giriş Yap</a></p>
+  </div>
+</div>
+
+<!-- Yaş Uyarı Pop-up -->
+<div class="modal fade" id="ageWarningModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">⚠️ Yaş Uyarısı</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Yasalar gereği 18 yaşından küçükler kayıt olamaz!</p>
+        <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Tamam</button>
+      </div>
+    </div>  
   </div>
 </div>

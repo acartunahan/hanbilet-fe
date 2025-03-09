@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TicketService } from '../../services/ticket.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -27,16 +28,17 @@ export class UserPanelComponent implements OnInit {
   }[] = [];
   
   
-<<<<<<< HEAD
-=======
   
->>>>>>> 99f825d (frontend guncel)
   userId!: number;
 
-  constructor(private userService: UserService, private authService: AuthService, private http: HttpClient) {}
+  constructor(private userService: UserService, private authService: AuthService, private http: HttpClient, private ticketService: TicketService) {}
 
   ngOnInit(): void {
     this.loadUser();
+  
+    this.ticketService.biletlerGuncelleListener().subscribe(() => {
+      this.loadBiletler();
+    });
   }
 
   loadUser(): void {
@@ -53,33 +55,32 @@ export class UserPanelComponent implements OnInit {
   loadBiletler(): void {
     if (!this.userId) return;
   
-    this.http.get<any[]>(`http://localhost:5232/api/biletler/${this.userId}`)
-      .subscribe({
-        next: (data) => {
-          console.log("Gelen Bilet Verisi:", data); // 🔥 JSON çıktısını kontrol et
+    const url = `http://localhost:5232/api/biletler/${this.userId}?timestamp=${new Date().getTime()}`;
   
-          this.biletler = data.map(bilet => ({
-            seferId: bilet.seferId,
-            koltukNumarasi: bilet.koltukNumarasi,
-            fiyat: bilet.fiyat,
-            satinAlmaTarihi: bilet.satinAlmaTarihi, 
-            kalkisSehir: bilet.seferBilgisi.kalkisSehir,
-            varisSehir: bilet.seferBilgisi.varisSehir,
-            tarih: bilet.seferBilgisi.tarih,
-            saat: bilet.seferBilgisi.saat,
-            firmaAdi: bilet.seferBilgisi.firmaAdi,
-            otobusPlaka: bilet.seferBilgisi.otobusPlaka
-          }));
-        },
-        error: (error) => {
-          console.error("Biletleri çekerken hata oluştu:", error);
-        }
-      });
+    this.http.get<any[]>(url).subscribe({
+      next: (data) => {
+        console.log("Gelen Bilet Verisi:", data);
+  
+        this.biletler = data.map(bilet => ({
+          seferId: bilet.seferId,
+          koltukNumarasi: bilet.koltukNumarasi,
+          fiyat: bilet.fiyat,
+          satinAlmaTarihi: bilet.satinAlmaTarihi, 
+          kalkisSehir: bilet.seferBilgisi.kalkisSehir,
+          varisSehir: bilet.seferBilgisi.varisSehir,
+          tarih: bilet.seferBilgisi.tarih,
+          saat: bilet.seferBilgisi.saat,
+          firmaAdi: bilet.seferBilgisi.firmaAdi,
+          otobusPlaka: bilet.seferBilgisi.otobusPlaka
+        }));
+      },
+      error: (error) => {
+        console.error("Biletleri çekerken hata oluştu:", error);
+      }
+    });
   }
   
-<<<<<<< HEAD
-=======
   
   
->>>>>>> 99f825d (frontend guncel)
+  
 }

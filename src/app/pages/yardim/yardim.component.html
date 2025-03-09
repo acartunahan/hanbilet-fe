@@ -1,0 +1,21 @@
+<div class="yardim-container">
+    <div class="yardim-card" *ngFor="let section of sections" (click)="toggleSection(section.id)">
+      <div class="icon-title">
+        <img [src]="section.icon" alt="icon" class="icon">
+        <h3>{{ section.title }}</h3>
+      </div>
+      <span class="arrow">&gt;</span>
+    </div>
+    <div class="yardim-content" *ngFor="let section of sections" [ngClass]="{ 'show': section.open }">
+      <table>
+        <tr>
+          <th>Konu</th>
+          <th>Açıklama</th>
+        </tr>
+        <tr *ngFor="let item of section.content">
+          <td>{{ item.topic }}</td>
+          <td>{{ item.description }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>

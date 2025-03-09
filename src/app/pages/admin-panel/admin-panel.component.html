@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center text-primary">Admin Panel</h2>
+    <table class="table table-hover mt-3">
+      <thead>
+        <tr>
+          <th>İşlem</th>
+          <th>Git</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sefer Ekle</td>
+          <td><button class="btn btn-success" (click)="goToPage('/sefer-ekle')">Git</button></td>
+        </tr>
+        <tr>
+          <td>Üye Sil</td>
+          <td><button class="btn btn-danger" (click)="goToPage('/uye-sil')">Git</button></td>
+        </tr>
+        <tr>
+          <td>Sefer Sil</td>
+          <td><button class="btn btn-warning" (click)="goToPage('/sefer-sil')">Git</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

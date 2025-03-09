@@ -1,15 +1,24 @@
 <div class="container text-center mt-4">
   <h2>🚌 Koltuk Seçme</h2>
 
-  <div class="bus-layout">
-    <div *ngFor="let koltuk of koltuklar" 
+  <div class="bus-container">
+    <!-- Otobüs ön kısmı (Sürücü) -->
+    <div class="bus-front">
+      <div class="driver-seat">🧑‍✈️</div>
+    </div>
+
+    <div class="bus-layout">
+      <div *ngFor="let koltuk of koltuklar"
       class="seat"
       [class.dolu]="koltuk.dolu"
+      [class.kadin]="koltuk.cinsiyet === 'Kadın'"
+      [class.erkek]="koltuk.cinsiyet === 'Erkek'"
       [class.selected]="koltuk.numara === selectedKoltuk"
       (click)="selectKoltuk(koltuk.numara)">
-      {{ koltuk.numara }}
+        {{ koltuk.numara }}
+      </div>
     </div>
-  </div>
+    
 
   <button class="btn btn-success mt-3" (click)="satinAl()" [disabled]="selectedKoltuk === null">
     Satın Al

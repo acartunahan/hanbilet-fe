@@ -1,4 +1,4 @@
-<select (change)="onSehirChange($event)" class="form-control">
+<select [(ngModel)]="selectedSehir" (change)="onSehirChange($event)" class="form-control">
   <option value="" disabled selected>Şehir Seç</option>
   <option *ngFor="let sehir of sehirler" [value]="sehir.id">
     {{ sehir.sehirAdi }}

@@ -49,10 +49,8 @@ export class SeferAramaComponent {
 
     this.http.get<any[]>('http://localhost:5232/api/seferler', { params }).subscribe({
       next: (data) => {
-        this.seferler = data.map(sefer => ({
-          ...sefer,
-          saat: sefer.saat ? sefer.saat.slice(0, 5) : "Bilinmiyor" // ⏰ Saat bilgisini HH:mm formatına çevir
-        }));
+        console.log("API'den gelen veriler:", data);  // Burada 'saat' verisini kontrol edin
+        this.seferler = data;
         this.aramaYapildi = true;
       },
       error: (error) => {
@@ -60,6 +58,7 @@ export class SeferAramaComponent {
         this.aramaYapildi = true;
       }
     });
+    
   }
 
   satinAl(seferId: number) {

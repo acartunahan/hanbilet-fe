@@ -2,11 +2,12 @@
 
 <!-- Kalkış Şehri -->
 <label>Kalkış Şehri:</label>
-<app-sehir-dropdown (sehirSecildi)="kalkisSehirId = $event"></app-sehir-dropdown>
+<app-sehir-dropdown (sehirSecildi)="kalkisSehirId = $event ?? undefined"></app-sehir-dropdown>
 
 <!-- Varış Şehri -->
 <label>Varış Şehri:</label>
-<app-sehir-dropdown (sehirSecildi)="varisSehirId = $event"></app-sehir-dropdown>
+<app-sehir-dropdown (sehirSecildi)="varisSehirId = $event ?? undefined"></app-sehir-dropdown>
+
 
 <!-- Firma -->
 <!-- Firma Seçimi -->

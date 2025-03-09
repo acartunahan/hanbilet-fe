@@ -1,6 +1,28 @@
-<div class="container text-center mt-5">
-    <h1 class="display-4">Hoş Geldiniz</h1>
-    <p class="lead">Otobüs bileti almak için sefer arayabilirsiniz.</p>
-    <a class="btn btn-primary btn-lg" routerLink="/sefer-arama">Sefer Ara</a>
+
+<div class="hero-container">
+  <div class="overlay"></div>
+  <div class="content text-center">
+    <h1 class="display-2 fw-bold text-light">🚌 Yolculuğa Çıkmaya Hazır mısın?</h1>
+    <p class="lead text-light">Hemen seferleri keşfet ve en uygun bileti satın al.</p>
+    <button class="btn btn-warning btn-lg shadow-lg hero-btn" (click)="openModal()">🚀 Sefer Ara</button>
   </div>
-  
+</div>
+
+
+<div class="modal fade" id="seferModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-black">
+        <h5 class="modal-title">🔒 Erişim Kısıtlandı</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Seferleri görüntüleyebilmek için önce giriş yapmalısınız.</p>
+        <a class="btn btn-dark text-warning fw-bold" routerLink="/register" (click)="closeModal()">📝 Kayıt Ol</a>
+        <a class="btn btn-outline-dark ms-2" routerLink="/login" (click)="closeModal()">🔑 Giriş Yap</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+

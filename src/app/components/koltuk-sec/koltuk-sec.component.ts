@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { TicketService } from '../../services/ticket.service';
 
 @Component({
   selector: 'app-koltuk-sec',
@@ -12,35 +13,41 @@ import { CommonModule } from '@angular/common';
 })
 export class KoltukSecComponent implements OnInit {
   seferId!: number;
-  koltuklar: { numara: number, dolu: boolean }[] = [];
+  koltuklar: { 
+    numara: number; 
+    dolu: boolean; 
+    userId?: number | null;  // ✅ Kullanıcı ID'si opsiyonel (nullable)
+    cinsiyet?: string | null; // ✅ Cinsiyet opsiyonel (nullable)
+  }[] = [];
+  
   selectedKoltuk: number | null = null;
-  userId = 1; // 📌 Kullanıcı giriş yaptığında gerçek ID ile değiştirilmeli!
+  userId = Number(localStorage.getItem('userId')); // Kullanıcı ID'sini localStorage'dan al
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private cd: ChangeDetectorRef, // Angular değişiklik algılama için
+    private ticketService: TicketService
+  ) {}
 
   ngOnInit(): void {
     this.seferId = Number(this.route.snapshot.paramMap.get('seferId'));
-  
-    console.log("Sefer ID:", this.seferId); // ✅ Sefer ID’yi kontrol etmek için
     this.getKoltuklar();
   }
-  
+
   getKoltuklar() {
     const url = `http://localhost:5232/api/koltuklar/${this.seferId}`;
-    console.log("API çağrısı yapılıyor:", url);
   
-    this.http.get<{ id: number, seferId: number, koltukNumarasi: number, dolu: boolean }[]>(url)
+    this.http.get<{ id: number, seferId: number, koltukNumarasi: number, dolu: boolean, userId?: number, cinsiyet?: string }[]>(url)
       .subscribe({
         next: (data) => {
-          console.log("Gelen koltuk verisi:", data);
-          
-          // 📌 Gelen veriyi Angular’ın beklediği formata çeviriyoruz!
           this.koltuklar = data.map(koltuk => ({
             numara: koltuk.koltukNumarasi,
-            dolu: koltuk.dolu
+            dolu: koltuk.dolu,
+            userId: koltuk.userId || null,
+            cinsiyet: koltuk.cinsiyet || null // ✅ Cinsiyet bilgisi alınıyor
           }));
-  
-          console.log("Dönüştürülmüş koltuklar:", this.koltuklar);
         },
         error: (error) => {
           console.error("Koltukları çekerken hata oluştu:", error);
@@ -49,10 +56,10 @@ export class KoltukSecComponent implements OnInit {
   }
   
   
-  
 
   selectKoltuk(numara: number) {
-    if (!this.koltuklar.find(k => k.numara === numara)?.dolu) {
+    const seciliKoltuk = this.koltuklar.find(k => k.numara === numara);
+    if (seciliKoltuk && !seciliKoltuk.dolu) {
       this.selectedKoltuk = numara;
     }
   }
@@ -62,29 +69,41 @@ export class KoltukSecComponent implements OnInit {
       alert("Lütfen bir koltuk seçin!");
       return;
     }
-
+  
+    const userId = Number(localStorage.getItem('userId'));
+    const userCinsiyet = localStorage.getItem('userCinsiyet');
+  
+    if (!userId || !userCinsiyet) {
+      alert("Kullanıcı bilgileri eksik! Lütfen tekrar giriş yapın.");
+      return;
+    }
+  
     const bilet = {
       seferId: this.seferId,
-      userId: localStorage.getItem('userId'),  // 🔥 Kullanıcının ID'sini ekle
+      userId: userId,
       koltukNumarasi: this.selectedKoltuk
     };
-    
-    console.log("Bilet Gönderiliyor:", bilet); // 🔥 Gönderilen veriyi kontrol et
-    
-    this.http.post('http://localhost:5232/api/biletler', bilet, { headers: { 'Content-Type': 'application/json' } }).subscribe({
-      next: () => {
+  
+    this.http.post('http://localhost:5232/api/koltuklar/satin-al', bilet).subscribe({
+      next: (response: any) => {
         alert("Bilet satın alındı!");
-        this.getKoltuklar();
+  
+        // 📌 Seçilen koltuğu güncelle
+        const selectedSeat = this.koltuklar.find(k => k.numara === this.selectedKoltuk);
+        if (selectedSeat) {
+          selectedSeat.dolu = true;
+          selectedSeat.userId = userId;
+          selectedSeat.cinsiyet = userCinsiyet; // ✅ Cinsiyet kaydediliyor
+        }
+  
+        this.selectedKoltuk = null;
+        this.cd.detectChanges();
       },
       error: (error) => {
-        console.error("Bilet satın alma hatası:", error); // 🔥 Hata mesajını logla
         alert("Bilet satın alınamadı: " + error.error);
       }
     });
-}
-
-
-  
+  }
   
   
 }

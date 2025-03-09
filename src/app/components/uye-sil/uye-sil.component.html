@@ -1,0 +1,13 @@
+<div class="delete-user-container">
+    <h2>Üye Silme</h2>
+    <div class="form-group">
+      <label for="userId">Kullanıcı ID:</label>
+      <input type="number" id="userId" [(ngModel)]="userId" placeholder="Kullanıcı ID girin" />
+    </div>
+    <button class="btn btn-danger" (click)="deleteUser()" [disabled]="!userId">Sil</button>
+  
+    <!-- Silme işlemi sonucu mesajı -->
+    <div *ngIf="message" class="alert" [ngClass]="{'alert-success': isSuccess, 'alert-danger': !isSuccess}">
+      {{ message }}
+    </div>
+  </div>

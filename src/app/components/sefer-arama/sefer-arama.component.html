@@ -37,37 +37,39 @@
   <div *ngIf="aramaYapildi">
     <h4 *ngIf="seferler.length === 0" class="text-danger mt-3">❌ Uygun Sefer Bulunamadı</h4>
 
-    <table *ngIf="seferler.length > 0" class="table table-bordered mt-3">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Kalkış Şehri</th>
-          <th>Varış Şehri</th>
-          <th>Tarih</th>
-          <th>Saat</th> <!-- ⏰ Yeni eklendi -->
-          <th>Fiyat</th>
-          <th>Firma</th>
-          <th>Otobüs</th>
-          <th>İşlem</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let sefer of seferler; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ sefer.kalkisSehir }}</td>
-          <td>{{ sefer.varisSehir }}</td>
-          <td>{{ sefer.tarih }}</td>
-          <td>{{ sefer.saat }}</td> <!-- ⏰ Yeni eklendi -->
-          <td>{{ sefer.fiyat | currency:'TRY' }}</td>
-          <td>{{ sefer.firmaAdi }}</td>
-          <td>{{ sefer.otobusPlaka }}</td>
-          <td>
-            <button *ngIf="isLoggedIn" class="btn btn-primary" (click)="satinAl(sefer.id)">
-              Satın Al
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<!-- Seferleri Listeleme -->
+<table *ngIf="seferler.length > 0" class="table table-bordered mt-3">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Kalkış Şehri</th>
+      <th>Varış Şehri</th>
+      <th>Tarih</th>
+      <th>Saat</th> 
+      <th>Fiyat</th>
+      <th>Firma</th>
+      <th>Otobüs</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sefer of seferler; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ sefer.kalkisSehirAdi }}</td>
+      <td>{{ sefer.varisSehirAdi }}</td>   
+      <td>{{ sefer.tarih | date }}</td>    
+      <td>{{ sefer.saat }}</td>
+      <td>{{ sefer.fiyat | currency:'TRY' }}</td>
+      <td>{{ sefer.firmaAdi }}</td>
+      <td>{{ sefer.otobusPlaka }}</td>
+      <td>
+        <button *ngIf="isLoggedIn" class="btn btn-primary" (click)="satinAl(sefer.id)">
+          Satın Al
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
   </div>
 </div>

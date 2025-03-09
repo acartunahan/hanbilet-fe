@@ -1,28 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<nav class="navbar navbar-expand-lg bg-warning shadow">
   <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">🚌 Bilet Uygulaması</a>
+    <a 
+    class="navbar-brand fw-bold text-white" 
+    [routerLink]="isLoggedIn ? null : '/'"
+    [style.pointerEvents]="isLoggedIn ? 'none' : 'auto'"
+  >
+    🚌 aCarBilet
+  </a>
+  
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/sefer-arama" routerLinkActive="active">🚌 Sefer Ara</a>
+          <a class="nav-link text-white" routerLink="/sefer-arama" routerLinkActive="active">🚌 Sefer Ara</a>
         </li>
 
-        <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/user-panel" routerLinkActive="active">👤 Kullanıcı Paneli</a>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            👤 Kullanıcı
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" routerLink="/biletlerim">🎟️ Biletlerim</a></li>
+            <li><a class="dropdown-item" routerLink="/ayarlar">⚙️ Ayarlar</a></li>
+          </ul>
+        </li>
+        
+
+        <!-- Admin Paneli sadece Admin olanlar görebilir -->
+        <li class="nav-item" *ngIf="isLoggedIn && userRole === 'Admin'">
+          <a class="nav-link text-white" routerLink="/admin-panel" routerLinkActive="active">👤 Admin Panel</a>
         </li>
 
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="btn btn-outline-light mx-2" routerLink="/login" routerLinkActive="active">Giriş Yap</a>
+          <a class="btn btn-dark mx-2" routerLink="/login" routerLinkActive="active">Giriş Yap</a>
         </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="btn btn-primary" routerLink="/register" routerLinkActive="active">Kayıt Ol</a>
+          <a class="btn btn-dark" routerLink="/register" routerLinkActive="active">Kayıt Ol</a>
         </li>
-
+        <li class="nav-item">
+          <a class="btn btn-light mx-2" routerLink="/yardim" routerLinkActive="active">❓ Yardım</a>
+        </li>
+        
         <li class="nav-item" *ngIf="isLoggedIn">
-          <button class="btn btn-danger" (click)="logout()">Çıkış Yap</button>
+          <button class="btn btn-dark logout-btn" (click)="logout()">Çıkış Yap</button>
         </li>
       </ul>
     </div>

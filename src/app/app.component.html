@@ -1,10 +1,15 @@
-<!-- Navbar -->
-<app-header></app-header>
+<!-- Sayfanın tamamını kaplayan div -->
+<div class="d-flex flex-column min-vh-100">
+  
+  <!-- Navbar -->
+  <app-header></app-header>
 
-<!-- Ana İçerik -->
-<div class="container mt-4">
-  <router-outlet></router-outlet>
+  <!-- Ana İçerik -->
+  <div class="container flex-grow-1 mt-4">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Footer (Her zaman en altta duracak) -->
+  <app-footer></app-footer>
+
 </div>
-
-<!-- Footer -->
-<app-footer></app-footer>

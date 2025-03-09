@@ -1,38 +1,94 @@
-.bus-layout {
+/* Otobüs genel yapısı */
+.bus-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2e2e2e;
+  border-radius: 20px;
+  padding: 20px;
+  width: fit-content;
+  margin: auto;
+  position: relative;
+}
+
+/* Otobüs ön kısmı */
+.bus-front {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: black;
+  height: 50px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* Sürücü koltuğu */
+.driver-seat {
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+/* Koltuk düzeni */
+.bus-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 50px);
+  gap: 10px;
   margin-top: 20px;
 }
 
+/* Koltukların temel stili */
 .seat {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
   text-align: center;
-  line-height: 40px;
+  line-height: 45px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
 }
 
-/* 🔥 Alınabilir koltuklar (Yeşil) */
+/* Boş koltuklar (Yeşil) */
 .seat:not(.dolu) {
   background-color: green;
   color: white;
 }
 
-/* 🔴 Dolu koltuklar (Kırmızı) */
+/* Dolu koltuklar (Kırmızı) */
 .seat.dolu {
   background-color: red;
   color: white;
   cursor: not-allowed;
 }
 
-/* 🎯 Seçili koltuk (Mavi) */
+/* Erkek kullanıcı koltuğu (Mavi) */
+.seat.erkek {
+  background-color: rgb(0, 199, 221) !important;
+  color: white;
+}
+
+/* Kadın kullanıcı koltuğu (Pembe) */
+.seat.kadin {
+  background-color: pink !important;
+  color: black;
+}
+
+
+/* Seçili koltuk (Mavi) */
 .seat.selected {
-  background-color: blue;
+  background-color: orange;
   color: white;
   transform: scale(1.1);
+}
+
+/* Koridor için boşluk bırakmak */
+.seat:nth-child(4n) {
+  margin-right: 20px; /* 4. koltuktan sonra boşluk bırak */
 }

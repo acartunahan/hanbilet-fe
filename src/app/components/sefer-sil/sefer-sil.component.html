@@ -1,0 +1,79 @@
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Sefer Sil</h1>
+  
+    <!-- Filtreleme Formu -->
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Kalkış Şehri" [(ngModel)]="searchKalkisSehir" (input)="filterSeferler()" />
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Varış Şehri" [(ngModel)]="searchVarisSehir" (input)="filterSeferler()" />
+      </div>
+      <div class="col-md-3">
+        <input type="date" class="form-control" [(ngModel)]="searchTarih" (input)="filterSeferler()" />
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-primary w-100" (click)="resetFilters()">Filtreyi Sıfırla</button>
+      </div>
+    </div>
+  
+    <!-- Sefer Listeleme Tablosu -->
+    <div class="row">
+      <div class="col-md-8">
+        <h3>Tüm Seferler</h3>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Kalkış Şehri</th>
+              <th>Varış Şehri</th>
+              <th>Tarih</th>
+              <th>Saat</th>
+              <th>Fiyat</th>
+              <th>Firma</th>
+              <th>Otobüs</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sefer of filteredSeferler" (click)="selectSefer(sefer)" [class.table-active]="selectedSefer?.id === sefer.id">
+              <td>{{ sefer.id }}</td>
+              <td>{{ sefer.kalkisSehirAdi }}</td>
+              <td>{{ sefer.varisSehirAdi }}</td>
+              <td>{{ sefer.tarih | date: 'dd.MM.yyyy' }}</td>
+              <td>{{ sefer.saat }}</td>
+              <td>{{ sefer.fiyat | currency: '₺' }}</td>
+              <td>{{ sefer.firmaAdi }}</td>
+              <td>{{ sefer.otobusPlaka }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="silSefer(sefer.id)">Sil</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Seçilen Sefer Detayları -->
+      <div class="col-md-4">
+        <h3>Seçilen Sefer</h3>
+        <div *ngIf="selectedSefer" class="card">
+          <div class="card-body">
+            <h5 class="card-title">Sefer Detayları</h5>
+            <p><strong>ID:</strong> {{ selectedSefer.id }}</p>
+            <p><strong>Kalkış Şehri:</strong> {{ selectedSefer.kalkisSehirAdi }}</p>
+            <p><strong>Varış Şehri:</strong> {{ selectedSefer.varisSehirAdi }}</p>
+            <p><strong>Tarih:</strong> {{ selectedSefer.tarih | date: 'dd.MM.yyyy' }}</p>
+            <p><strong>Saat:</strong> {{ selectedSefer.saat }}</p>
+            <p><strong>Fiyat:</strong> {{ selectedSefer.fiyat | currency: '₺' }}</p>
+            <p><strong>Firma:</strong> {{ selectedSefer.firmaAdi }}</p>
+            <p><strong>Otobüs:</strong> {{ selectedSefer.otobusPlaka }}</p>
+            <button class="btn btn-danger w-100" (click)="silSefer(selectedSefer.id)">Seferi Sil</button>
+          </div>
+        </div>
+        <div *ngIf="!selectedSefer" class="alert alert-info">
+          Lütfen bir sefer seçin.
+        </div>
+      </div>
+    </div>
+  </div>
+  
