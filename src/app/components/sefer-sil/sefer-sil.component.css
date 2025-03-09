@@ -11,11 +11,11 @@
   .table {
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer; /* Satırlara tıklanabilir özellik ekler */
+    cursor: pointer; 
   }
   
   .table-active {
-    background-color: #f8f9fa; /* Seçili satırın arka plan rengi */
+    background-color: #f8f9fa; 
   }
   
   .card {

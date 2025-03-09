@@ -6,14 +6,14 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-sehir-dropdown',
   standalone: true,
-  imports: [CommonModule, FormsModule], // ✅ FormsModule ile iki yönlü veri bağlama çalışır!
+  imports: [CommonModule, FormsModule], 
   templateUrl: './sehir-dropdown.component.html',
 })
 export class SehirDropdownComponent implements OnInit {
   sehirler: any[] = [];
   selectedSehir: number | null = null;
 
-  @Output() sehirSecildi = new EventEmitter<number | null>(); // ✅ `null` da gönderebiliriz
+  @Output() sehirSecildi = new EventEmitter<number | null>(); 
 
   constructor(private http: HttpClient) {}
 
@@ -29,8 +29,8 @@ export class SehirDropdownComponent implements OnInit {
 
   onSehirChange(event: Event) {
     const target = event.target as HTMLSelectElement;
-    this.selectedSehir = target.value ? Number(target.value) : null; // ✅ Seçim kaldırılırsa `null`
+    this.selectedSehir = target.value ? Number(target.value) : null; 
     console.log("Seçilen şehir ID:", this.selectedSehir);
-    this.sehirSecildi.emit(this.selectedSehir); // ✅ Dışarıya güncel ID'yi gönderiyoruz
+    this.sehirSecildi.emit(this.selectedSehir); 
   }
 }

@@ -35,7 +35,7 @@ login(): void {
 
       alert("Giriş başarılı!");
 
-      // 📌 Kullanıcı bilgilerini localStorage'a kaydet
+
       localStorage.setItem('userId', response.userId.toString());
       localStorage.setItem('userRole', response.role);
 
@@ -45,7 +45,7 @@ login(): void {
 
       this.authService.setLoginStatus(response.userId, response.role, response.cinsiyet);
 
-      // ✅ Kullanıcı giriş yaptıysa `sefer-arama` sayfasına yönlendir
+
       this.router.navigate(['/sefer-arama']);
     },
     error => {

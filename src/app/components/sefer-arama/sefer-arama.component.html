@@ -1,7 +1,6 @@
 <div class="container mt-4">
   <h2>🚌 Sefer Arama</h2>
 
-  <!-- Filtreleme Formu -->
   <div class="row mb-3">
     <div class="col-md-3">
       <label>Kalkış Şehri:</label>
@@ -33,11 +32,11 @@
     </div>
   </div>
 
-  <!-- Seferleri Listeleme -->
+
   <div *ngIf="aramaYapildi">
     <h4 *ngIf="seferler.length === 0" class="text-danger mt-3">❌ Uygun Sefer Bulunamadı</h4>
 
-<!-- Seferleri Listeleme -->
+
 <table *ngIf="seferler.length > 0" class="table table-bordered mt-3">
   <thead>
     <tr>

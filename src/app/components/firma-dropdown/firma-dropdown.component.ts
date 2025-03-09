@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FirmaDropdownComponent implements OnInit {
   firmalar: any[] = []; 
-  @Output() firmaSecildi = new EventEmitter<number>(); // ✅ Doğru event adı
+  @Output() firmaSecildi = new EventEmitter<number>(); 
 
   constructor(private http: HttpClient) {}
 
@@ -38,6 +38,6 @@ export class FirmaDropdownComponent implements OnInit {
 
   onFirmaChange(event: Event) {
     const selectedFirmaId = Number((event.target as HTMLSelectElement).value);
-    this.firmaSecildi.emit(selectedFirmaId); // ✅ Firma ID'yi number olarak gönderiyoruz
+    this.firmaSecildi.emit(selectedFirmaId); 
   }
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // Kullanıcının giriş durumunu kontrol etmek için
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-sefer-arama',
@@ -49,7 +49,7 @@ export class SeferAramaComponent {
 
     this.http.get<any[]>('http://localhost:5232/api/seferler', { params }).subscribe({
       next: (data) => {
-        console.log("API'den gelen veriler:", data);  // Burada 'saat' verisini kontrol edin
+        console.log("API'den gelen veriler:", data); 
         this.seferler = data;
         this.aramaYapildi = true;
       },

@@ -1,21 +1,19 @@
 <h2>Sefer Ekle</h2>
 
-<!-- Kalkış Şehri -->
+
 <label>Kalkış Şehri:</label>
 <app-sehir-dropdown (sehirSecildi)="kalkisSehirId = $event ?? undefined"></app-sehir-dropdown>
 
-<!-- Varış Şehri -->
+
 <label>Varış Şehri:</label>
 <app-sehir-dropdown (sehirSecildi)="varisSehirId = $event ?? undefined"></app-sehir-dropdown>
 
 
-<!-- Firma -->
-<!-- Firma Seçimi -->
+
 <label>Firma:</label>
 <app-firma-dropdown (firmaSecildi)="onFirmaSecildi($event)"></app-firma-dropdown> <!-- ✅ Hata düzeldi -->
 
 
-<!-- Otobüs -->
 <label>Otobüs:</label>
 <select [(ngModel)]="otobusId" class="form-control">
   <option *ngFor="let otobus of otobusler" [value]="otobus.id">
@@ -23,17 +21,17 @@
   </option>
 </select>
 
-<!-- Tarih -->
+
 <label>Tarih:</label>
 <input type="date" [(ngModel)]="tarih" class="form-control" />
 
-<!-- Saat -->
+
 <label>Saat:</label>
 <input type="time" [(ngModel)]="saat" class="form-control" />
 
-<!-- Fiyat -->
+
 <label>Fiyat:</label>
 <input type="number" [(ngModel)]="fiyat" class="form-control" />
 
-<!-- Sefer Ekle Butonu -->
+
 <button (click)="seferEkle()" class="btn btn-success">Sefer Ekle</button>

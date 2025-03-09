@@ -16,18 +16,18 @@ export class KoltukSecComponent implements OnInit {
   koltuklar: { 
     numara: number; 
     dolu: boolean; 
-    userId?: number | null;  // ✅ Kullanıcı ID'si opsiyonel (nullable)
-    cinsiyet?: string | null; // ✅ Cinsiyet opsiyonel (nullable)
+    userId?: number | null;  
+    cinsiyet?: string | null; 
   }[] = [];
   
   selectedKoltuk: number | null = null;
-  userId = Number(localStorage.getItem('userId')); // Kullanıcı ID'sini localStorage'dan al
+  userId = Number(localStorage.getItem('userId')); 
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private cd: ChangeDetectorRef, // Angular değişiklik algılama için
+    private cd: ChangeDetectorRef, 
     private ticketService: TicketService
   ) {}
 
@@ -46,7 +46,7 @@ export class KoltukSecComponent implements OnInit {
             numara: koltuk.koltukNumarasi,
             dolu: koltuk.dolu,
             userId: koltuk.userId || null,
-            cinsiyet: koltuk.cinsiyet || null // ✅ Cinsiyet bilgisi alınıyor
+            cinsiyet: koltuk.cinsiyet || null 
           }));
         },
         error: (error) => {
@@ -88,12 +88,12 @@ export class KoltukSecComponent implements OnInit {
       next: (response: any) => {
         alert("Bilet satın alındı!");
   
-        // 📌 Seçilen koltuğu güncelle
+
         const selectedSeat = this.koltuklar.find(k => k.numara === this.selectedKoltuk);
         if (selectedSeat) {
           selectedSeat.dolu = true;
           selectedSeat.userId = userId;
-          selectedSeat.cinsiyet = userCinsiyet; // ✅ Cinsiyet kaydediliyor
+          selectedSeat.cinsiyet = userCinsiyet; 
         }
   
         this.selectedKoltuk = null;

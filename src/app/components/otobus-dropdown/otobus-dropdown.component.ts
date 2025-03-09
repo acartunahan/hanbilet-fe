@@ -6,14 +6,14 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-otobus-dropdown',
   standalone: true,
-  imports: [CommonModule, FormsModule], // FormsModule eklendi
+  imports: [CommonModule, FormsModule],
   templateUrl: './otobus-dropdown.component.html'
 })
 export class OtobusDropdownComponent implements OnInit {
   otobusler: any[] = [];
   selectedOtobus: number | undefined = undefined;
 
-  @Output() otobusSecildi = new EventEmitter<number>(); // Angular’a veri aktarma
+  @Output() otobusSecildi = new EventEmitter<number>(); 
 
   constructor(private http: HttpClient) {}
 
@@ -29,8 +29,8 @@ export class OtobusDropdownComponent implements OnInit {
 
   onOtobusChange(event: Event) {
     const target = event.target as HTMLSelectElement;
-    this.selectedOtobus = target.value ? Number(target.value) : undefined; // `number` olarak çeviriyoruz
+    this.selectedOtobus = target.value ? Number(target.value) : undefined;
     console.log("Seçilen otobüs ID:", this.selectedOtobus);
-    this.otobusSecildi.emit(this.selectedOtobus); // `@Output()` ile dışarı aktarıyoruz
+    this.otobusSecildi.emit(this.selectedOtobus); 
   }
 }

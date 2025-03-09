@@ -19,11 +19,11 @@ export class SeferEkleComponent {
   fiyat: number = 0;
   firmaId: number | undefined = undefined;
   otobusId: number | undefined = undefined;
-  otobusler: any[] = []; // Otobüs listesi
+  otobusler: any[] = []; 
 
   constructor(private http: HttpClient) {}
 
-  // 🔥 Firma seçildiğinde sadece o firmaya ait otobüsleri yükle
+
   onFirmaSecildi(firmaId: number) {
     this.firmaId = firmaId;
     this.otobusId = undefined; 
@@ -47,14 +47,14 @@ export class SeferEkleComponent {
       return;
     }
 
-    // 🔥 Saat formatını TimeSpan olarak kaydetmek için düzenle
-    const saatTimeSpan = this.saat + ":00"; // Örn: "15:30:00"
+
+    const saatTimeSpan = this.saat + ":00"; 
 
     const yeniSefer = {
       kalkisSehirId: this.kalkisSehirId,
       varisSehirId: this.varisSehirId,
-      tarih: this.tarih, // 📅 Tarih normal şekilde gönderilecek
-      saat: saatTimeSpan, // ⏰ Saat TimeSpan formatında gönderilecek
+      tarih: this.tarih, 
+      saat: saatTimeSpan, 
       fiyat: this.fiyat,
       firmaId: this.firmaId,
       otobusId: this.otobusId

@@ -11,25 +11,25 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./sefer-sil.component.css']
 })
 export class SeferSilComponent implements OnInit {
-  seferler: any[] = []; // Tüm seferlerin listesi
-  filteredSeferler: any[] = []; // Filtrelenmiş seferler
-  selectedSefer: any = null; // Seçilen sefer
-  searchKalkisSehir: string = ''; // Kalkış şehri filtresi
-  searchVarisSehir: string = ''; // Varış şehri filtresi
-  searchTarih: string = ''; // Tarih filtresi
+  seferler: any[] = []; 
+  filteredSeferler: any[] = []; 
+  selectedSefer: any = null; 
+  searchKalkisSehir: string = ''; 
+  searchVarisSehir: string = ''; 
+  searchTarih: string = ''; 
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.getSeferler(); // Sayfa yüklendiğinde seferleri getir
+    this.getSeferler(); 
   }
 
-  // Tüm seferleri getir
+
   getSeferler(): void {
     this.http.get<any[]>('http://localhost:5232/api/seferler').subscribe(
       (data) => {
         this.seferler = data;
-        this.filteredSeferler = [...this.seferler]; // İlk başta tüm seferler filtrelenmiş listeye aktarılır
+        this.filteredSeferler = [...this.seferler]; 
       },
       (error) => {
         console.error('Seferler yüklenirken hata oluştu:', error);
@@ -37,18 +37,18 @@ export class SeferSilComponent implements OnInit {
     );
   }
 
-  // Seferi seçme işlemi
+
   selectSefer(sefer: any): void {
     this.selectedSefer = sefer;
   }
 
-  // Sefer silme işlemi
+
   silSefer(seferId: number): void {
     if (confirm('Bu seferi silmek istediğinizden emin misiniz?')) {
       this.http.delete(`http://localhost:5232/api/seferler/${seferId}`).subscribe(
         () => {
           alert('Sefer başarıyla silindi.');
-          this.getSeferler(); // Listeyi yenile
+          this.getSeferler(); 
         },
         (error) => {
           console.error('Sefer silinirken hata oluştu:', error);
@@ -57,7 +57,7 @@ export class SeferSilComponent implements OnInit {
     }
   }
 
-  // Filtreleme işlemi
+
   filterSeferler(): void {
     this.filteredSeferler = this.seferler.filter((sefer) => {
       return (
@@ -68,11 +68,11 @@ export class SeferSilComponent implements OnInit {
     });
   }
 
-  // Filtreyi sıfırlama işlemi
+
   resetFilters(): void {
     this.searchKalkisSehir = '';
     this.searchVarisSehir = '';
     this.searchTarih = '';
-    this.filterSeferler(); // Filtreyi sıfırladıktan sonra tekrar filtreleme
+    this.filterSeferler(); 
   }
 }

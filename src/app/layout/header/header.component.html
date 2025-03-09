@@ -29,7 +29,6 @@
         </li>
         
 
-        <!-- Admin Paneli sadece Admin olanlar görebilir -->
         <li class="nav-item" *ngIf="isLoggedIn && userRole === 'Admin'">
           <a class="nav-link text-white" routerLink="/admin-panel" routerLinkActive="active">👤 Admin Panel</a>
         </li>

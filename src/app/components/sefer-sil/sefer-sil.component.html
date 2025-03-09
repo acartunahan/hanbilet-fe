@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Sefer Sil</h1>
   
-    <!-- Filtreleme Formu -->
+
     <div class="row mb-3">
       <div class="col-md-3">
         <input type="text" class="form-control" placeholder="Kalkış Şehri" [(ngModel)]="searchKalkisSehir" (input)="filterSeferler()" />
@@ -17,7 +17,7 @@
       </div>
     </div>
   
-    <!-- Sefer Listeleme Tablosu -->
+
     <div class="row">
       <div class="col-md-8">
         <h3>Tüm Seferler</h3>
@@ -53,7 +53,7 @@
         </table>
       </div>
   
-      <!-- Seçilen Sefer Detayları -->
+
       <div class="col-md-4">
         <h3>Seçilen Sefer</h3>
         <div *ngIf="selectedSefer" class="card">

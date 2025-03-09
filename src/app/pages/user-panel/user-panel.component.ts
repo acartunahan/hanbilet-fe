@@ -47,7 +47,7 @@ export class UserPanelComponent implements OnInit {
       this.userId = +userId;
       this.userService.getUser(this.userId).subscribe(response => {
         this.user = response;
-        this.loadBiletler(); // Kullanıcı yüklendikten sonra biletleri getir
+        this.loadBiletler(); 
       });
     }
   }

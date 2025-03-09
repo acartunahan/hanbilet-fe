@@ -12,13 +12,13 @@ import { FormsModule } from '@angular/forms';
   
 })
 export class UyeSilComponent {
-  userId: number | null = null; // Kullanıcı ID'si
-  message: string = ''; // Silme işlemi sonucu mesajı
-  isSuccess: boolean = false; // İşlem başarılı mı?
+  userId: number | null = null; 
+  message: string = ''; 
+  isSuccess: boolean = false; 
 
   constructor(private http: HttpClient) {}
 
-  // Kullanıcıyı silme işlemi
+
   deleteUser() {
     if (!this.userId) {
       this.message = 'Lütfen bir kullanıcı ID girin.';
@@ -32,7 +32,7 @@ export class UyeSilComponent {
       next: (response: any) => {
         this.message = response.message || 'Kullanıcı başarıyla silindi.';
         this.isSuccess = true;
-        this.userId = null; // Input'u temizle
+        this.userId = null; 
       },
       error: (error) => {
         this.message = error.error?.message || 'Kullanıcı silinirken bir hata oluştu.';

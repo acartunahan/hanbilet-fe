@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, userData).pipe(
       tap((response: any) => {
         console.log("API Yanıtı (login):", response);
-        this.setLoginStatus(response.userId, response.role, response.cinsiyet); // ✅ Cinsiyet bilgisini de kaydet
+        this.setLoginStatus(response.userId, response.role, response.cinsiyet); 
       }),
       catchError(error => {
         console.error("Login API Hatası:", error);
@@ -46,7 +46,7 @@ export class AuthService {
       localStorage.setItem('userRole', role);
       
       if (cinsiyet) {
-        localStorage.setItem('userCinsiyet', cinsiyet); // ✅ Cinsiyet bilgisini kaydet
+        localStorage.setItem('userCinsiyet', cinsiyet); 
       }
 
       this.isLoggedInSubject.next(true);
@@ -62,7 +62,7 @@ export class AuthService {
 logout(): void {
   localStorage.removeItem('userId');
   localStorage.removeItem('userRole');
-  localStorage.removeItem('userCinsiyet'); // ✅ Cinsiyet bilgisini de temizle
+  localStorage.removeItem('userCinsiyet'); 
 
   this.isLoggedInSubject.next(false);
   this.userRoleSubject.next('');
@@ -72,11 +72,11 @@ logout(): void {
 
   getUserId(): number | null {
     const userId = localStorage.getItem('userId');
-    return userId ? +userId : null; // String'i number'a çevir
+    return userId ? +userId : null; 
   }
 
   getUserRole(): string {
-    return localStorage.getItem('userRole') || 'User'; // Varsayılan olarak "User" döndür
+    return localStorage.getItem('userRole') || 'User'; 
   }
 
   getUserCinsiyet(): string | null {
@@ -85,6 +85,6 @@ logout(): void {
 
 
   checkLoginStatus(): boolean {
-    return !!localStorage.getItem('userId'); // Kullanıcı ID varsa true döndür
+    return !!localStorage.getItem('userId'); 
   }
 }
